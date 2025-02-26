@@ -10,6 +10,9 @@
 - [password cracking](password_cracking.md)
 - [gtfobins](https://gtfobins.github.io/)
 
+- __Downloading file from remote ssh__
+  - __`scp admin@10.0.1.22:~/Desktop/id_rsa .`__
+
 
 - __If you have permission to write `/etc/shadow` use the below commands__
   - __First you need to creat a one hash password using openssl__
