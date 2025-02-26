@@ -1,5 +1,5 @@
 
-## Linux Privilege Escalation:
+### Linux Privilege Escalation:
 
 - `sudo -l`
 - __`find / -name local.txt 2> /dev/null`__
@@ -19,7 +19,7 @@
 
 ---------------------
 
-# Upgrading Non-Interactive Shells
+### Upgrading Non-Interactive Shells
 
 - __1. `cat /etc/shells` Check which shells are available in the target system__
 - __2. Check for `python --version` to know python is installed or not__
@@ -37,7 +37,7 @@
 
 ---------------------
 
-## **find** command which helps us in finding lot of stuff
+### Find command which helps us in finding lot of stuff
 ```
 Syntax: find <path> <options> <regex/name>
 find . -name flag1.txt: find the file named “flag1.txt” in the current directory
@@ -148,5 +148,4 @@ find / -perm -u=s -type f 2>/dev/null` this will list all the suid files
 - Then go back to the target machine and we can view the binary we created in the place we mounted, now run that and get root privileges!(do note that giving executable rights is not sufficient, we also need to give share rights by `chmod +s <binary>`)
 - Then we're good to go!
 
----------------------------
  
