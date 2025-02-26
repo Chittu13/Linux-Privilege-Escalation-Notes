@@ -1,7 +1,8 @@
 
 ### Linux Privilege Escalation:
 
-- `sudo -l`
+- __`sudo -l`__
+- __`bin/bash -i` to get interactive shell__
 - __`find / -name local.txt 2> /dev/null`__
 - __`find -type d -name ".*" 2>/dev/null`__ __it will check hidden directories.__
 - __`find / -not -type l -perm -o+w`__
