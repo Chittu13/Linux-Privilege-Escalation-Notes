@@ -15,8 +15,49 @@
     - __`openssl passwd -1 -salt abc password123` it will give you a hash `$1$abc$DSFILJKSD7393llsd.0s/` copy that__
     - __Edit the root password__
       - __`root:$1$abc$DSFILJKSD7393llsd.0s/:1772:0:99999:7:::`__
-     
 
+
+---------------------
+
+# Upgrading Non-Interactive Shells
+
+- __1. `cat /etc/shells` Check which shells are available in the target system__
+- __2. Check for `python --version` to know python is installed or not__
+  - __`python -c 'import pty; pty.spawn("/bin/bash")'`__
+- __3. Check for `perl --help` installed or not__
+  - __perl -e 'exec "bin/bash";'__
+  - __perl: exec "/bin/bash";__
+- __4. ruby: exec "bin/bash"__
+
+- __Important__
+  - __`env`__
+  - __`export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`__
+  - __`export TERM=xterm`__
+  - __`export SHELL=bash`__
+
+---------------------
+
+## **find** command which helps us in finding lot of stuff
+```
+Syntax: find <path> <options> <regex/name>
+find . -name flag1.txt: find the file named “flag1.txt” in the current directory
+find /home -name flag1.txt : find the file names “flag1.txt” in the /home directory
+find / -type d -name config : find the directory named config under “/”
+find / -type f -perm 0777` : find files with the 777 permissions (files readable, writable, and executable by all users)
+find / -perm a=x : find executable files
+find /home -user frank : find all files for user “frank” under “/home”
+find / -mtime 10 : find files that were modified in the last 10 days
+find / -atime 10 : find files that were accessed in the last 10 day
+find / -cmin -60 : find files changed within the last hour (60 minutes)
+find / -amin -60 : find files accesses within the last hour (60 minutes)
+find / -size 50M : find files with a 50 MB size
+find / -writable -type d 2>/dev/null : Find world-writeable folders
+find / -perm -222 -type d 2>/dev/null : Find world-writeable folders
+find / -perm -o w -type d 2>/dev/null : Find world-writeable folders
+find / -perm -o x -type d 2>/dev/null : Find world-executable folders
+We can also find programming languages and supported languages: find / -name perl*, find / -name python*, find / -name gcc* ...etc
+find / -perm -u=s -type f 2>/dev/null : Find files with the SUID bit, which allows us to run the file with a higher privilege level than the current user. This is important!
+```
 ---------------------
 ### Enumeration: 
 - Here we're going to see few commands which help us in enumerating target system
@@ -46,27 +87,7 @@
 	* `netstat -tp` - connections with service name and pid we can also add "l" for only listening ports
 	* `netstat -i` - interface related information
 	* `netstat -ano`
-14. **find** command which helps us in finding lot of stuff,
-```
-Syntax: find <path> <options> <regex/name>
-find . -name flag1.txt: find the file named “flag1.txt” in the current directory
-find /home -name flag1.txt : find the file names “flag1.txt” in the /home directory
-find / -type d -name config : find the directory named config under “/”
-find / -type f -perm 0777` : find files with the 777 permissions (files readable, writable, and executable by all users)
-find / -perm a=x : find executable files
-find /home -user frank : find all files for user “frank” under “/home”
-find / -mtime 10 : find files that were modified in the last 10 days
-find / -atime 10 : find files that were accessed in the last 10 day
-find / -cmin -60 : find files changed within the last hour (60 minutes)
-find / -amin -60 : find files accesses within the last hour (60 minutes)
-find / -size 50M : find files with a 50 MB size
-find / -writable -type d 2>/dev/null : Find world-writeable folders
-find / -perm -222 -type d 2>/dev/null : Find world-writeable folders
-find / -perm -o w -type d 2>/dev/null : Find world-writeable folders
-find / -perm -o x -type d 2>/dev/null : Find world-executable folders
-We can also find programming languages and supported languages: find / -name perl*, find / -name python*, find / -name gcc* ...etc
-find / -perm -u=s -type f 2>/dev/null : Find files with the SUID bit, which allows us to run the file with a higher privilege level than the current user. This is important!
-```
+
 
 ----------------
 ### Automated Enumeration Scripts:
