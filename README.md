@@ -1,13 +1,8 @@
-# Linux-Privilege-Escalation-Notes
-
 
 ## Linux Privilege Escalation:
-- By [Sai Sathvik](https://linktr.ee/saisathvikruppa)
-- In order to understand what a particular Linux command does, use: https://www.explainshell.com/
-- Important Resource: https://null-byte.wonderhowto.com/how-to/crack-shadow-hashes-after-getting-root-linux-system-0186386/
-- Privilege escalation is the technique used to escalate our privileges from lower user to higher user(interms of privileges)
-- Once we obtain the higher level privilege on the system then we can do a lot of things on that system
 
+- `sudo -l`
+- 
 ---------------------
 ### Enumeration: 
 - Here we're going to see few commands which help us in enumerating target system
@@ -38,54 +33,46 @@
 	* `netstat -i` - interface related information
 	* `netstat -ano`
 14. **find** command which helps us in finding lot of stuff,
-	- Syntax: `find <path> <options> <regex/name>`
-	find . -name flag1.txt: find the file named “flag1.txt” in the current directory
-	- `find /home -name flag1.txt` : find the file names “flag1.txt” in the /home directory
-	- `find / -type d -name config` : find the directory named config under “/”
-	- `find / -type f -perm 0777` : find files with the 777 permissions (files readable, writable, and executable by all users)
-	- `find / -perm a=x` : find executable files
-	- `find /home -user frank` : find all files for user “frank” under “/home”
-	- `find / -mtime 10` : find files that were modified in the last 10 days
-	- `find / -atime 10` : find files that were accessed in the last 10 day
-	- `find / -cmin -60` : find files changed within the last hour (60 minutes)
-	- `find / -amin -60` : find files accesses within the last hour (60 minutes)
-	- `find / -size 50M` : find files with a 50 MB size
-	- `find / -writable -type d 2>/dev/null` : Find world-writeable folders
-	- `find / -perm -222 -type d 2>/dev/null` : Find world-writeable folders
-	- `find / -perm -o w -type d 2>/dev/null` : Find world-writeable folders
-	- `find / -perm -o x -type d 2>/dev/null` : Find world-executable folders
-	- We can also find programming languages and supported languages: `find / -name perl*`, `find / -name python*`, `find / -name gcc*` ...etc
-	- `find / -perm -u=s -type f 2>/dev/null` : Find files with the SUID bit, which allows us to run the file with a higher privilege level than the current user. This is important!
-15. We can even make use of "grep", "locate", "sort"...etc
+```
+Syntax: find <path> <options> <regex/name>
+find . -name flag1.txt: find the file named “flag1.txt” in the current directory
+find /home -name flag1.txt : find the file names “flag1.txt” in the /home directory
+find / -type d -name config : find the directory named config under “/”
+find / -type f -perm 0777` : find files with the 777 permissions (files readable, writable, and executable by all users)
+find / -perm a=x : find executable files
+find /home -user frank : find all files for user “frank” under “/home”
+find / -mtime 10 : find files that were modified in the last 10 days
+find / -atime 10 : find files that were accessed in the last 10 day
+find / -cmin -60 : find files changed within the last hour (60 minutes)
+find / -amin -60 : find files accesses within the last hour (60 minutes)
+find / -size 50M : find files with a 50 MB size
+find / -writable -type d 2>/dev/null : Find world-writeable folders
+find / -perm -222 -type d 2>/dev/null : Find world-writeable folders
+find / -perm -o w -type d 2>/dev/null : Find world-writeable folders
+find / -perm -o x -type d 2>/dev/null : Find world-executable folders
+We can also find programming languages and supported languages: find / -name perl*, find / -name python*, find / -name gcc* ...etc
+find / -perm -u=s -type f 2>/dev/null : Find files with the SUID bit, which allows us to run the file with a higher privilege level than the current user. This is important!
+```
 
 ----------------
 ### Automated Enumeration Scripts:
-- In real life we dont get much time to do enumeration so we can make use of some cool automated scripts like follows,
-- LinPeas: https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS
-- LinEnum: https://github.com/rebootuser/LinEnum
-- LES (Linux Exploit Suggester): https://github.com/mzet-/linux-exploit-suggester
-- Linux Smart Enumeration: https://github.com/diego-treitos/linux-smart-enumeration
-- Linux Priv Checker: https://github.com/linted/linuxprivchecker
 
--------------------
-### Linux Kernel Exploits:
-- After finding the version of Kernel simple google for that exploit or you can also use "Linux Exploit suggester"
-- Once you find the exploit for the privesc, transfer the payload from your machine to target machine and execute and you're good to go.
-- In an example I worked out with **overlayfs** exploit and got higher privileges
+- [LinPeas](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS)
+- [LinEnum](https://github.com/rebootuser/LinEnum)
+- [LES](https://github.com/mzet-/linux-exploit-suggester)
+- [Linux Smart Enumeration](https://github.com/diego-treitos/linux-smart-enumeration)
+- [Linux Priv Checker](https://github.com/linted/linuxprivchecker)
 
 ------------------
 ### Sudo:
-- This one of the first step to do, when you get access to the machine just simpley run "sudo -l", which lists all the files that we can run as root without any password
-- Once you have any to run then navigate to https://gtfobins.github.io/ and search for is the one specified is a system program or else modify the file with "/bin/sh" and run that
-- GTFO bins is going to be saviour!
+- Run "sudo -l", which lists all the files that we can run as root without any password
+
 
 ----------------------
 ### SUID:(Set owner User ID)
 - Its a kind of permission which gives specific permissions to run a file as root/owner
 - This is really helpful to test.
-- `find / -perm -u=s -type f 2>/dev/null` this will list all the suid files
-- Then later search in GTFObins and look for the way to bypass
-- Resource: https://null-byte.wonderhowto.com/how-to/crack-shadow-hashes-after-getting-root-linux-system-0186386/
+find / -perm -u=s -type f 2>/dev/null` this will list all the suid files
 
 ------------------
 ### Capabilities:
@@ -129,5 +116,4 @@
 - Then we're good to go!
 
 ---------------------------
-
-## Thank you!!
+ 
