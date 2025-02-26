@@ -2,7 +2,9 @@
 ## Linux Privilege Escalation:
 
 - `sudo -l`
-- 
+- __`find / -name local.txt 2> /dev/null`__
+- __`find -type d -name ".*" 2>/dev/null`__ __it will check hidden directories.__
+
 ---------------------
 ### Enumeration: 
 - Here we're going to see few commands which help us in enumerating target system
@@ -62,10 +64,6 @@ find / -perm -u=s -type f 2>/dev/null : Find files with the SUID bit, which allo
 - [LES](https://github.com/mzet-/linux-exploit-suggester)
 - [Linux Smart Enumeration](https://github.com/diego-treitos/linux-smart-enumeration)
 - [Linux Priv Checker](https://github.com/linted/linuxprivchecker)
-
-------------------
-### Sudo:
-- Run "sudo -l", which lists all the files that we can run as root without any password
 
 
 ----------------------
