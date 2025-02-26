@@ -88,6 +88,21 @@ find / -perm -u=s -type f 2>/dev/null : Find files with the SUID bit, which allo
 	* `netstat -tp` - connections with service name and pid we can also add "l" for only listening ports
 	* `netstat -i` - interface related information
 	* `netstat -ano`
+  - __`hostname`__
+  - __`cat /etc/issue` or `cat/etc/*release`__
+  - __`unmae -a` display hostname, kernal version__
+  - __`env`__
+  - __`lscpu`__
+  - __`free -h`__
+  - __`df -h` Display the storage divers__
+  - __`df -ht ext4`__
+  - __`lsblk | grep sd`__
+  - __`dpkg -l` display the installed packages__
+  - __`adduser -m royal /bin/bash`__
+  - __`groups`__
+  - __`groups bob`__
+  - __`usermod -aG root bob`__
+  - __`lastlog`__
 
 
 ----------------
