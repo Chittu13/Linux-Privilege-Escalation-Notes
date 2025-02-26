@@ -4,6 +4,7 @@
 - `sudo -l`
 - __`find / -name local.txt 2> /dev/null`__
 - __`find -type d -name ".*" 2>/dev/null`__ __it will check hidden directories.__
+- [password cracking](password_cracking.md)
 
 ---------------------
 ### Enumeration: 
